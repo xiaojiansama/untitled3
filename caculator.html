@@ -48,10 +48,9 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <input type="button"  value="0"   class="btn_color3 btn_number" style="width:173px">
-                </td>
+                <td ><input type="button"  value="0"   class="btn_color3 btn_number"></td>
                 <td><input type="button"  value="."   class="btn_color3 btn_number" ></td>
+                <td><input type="button"  value="AC"  class="btn_color4 btn_operation"></td>
                 <td><input type="button"  value="＋"  class="btn_color4 btn_operation"></td>
             </tr>
             </tbody>
@@ -74,6 +73,8 @@
     var b=0;
     var his=new Array(),h=0;
     var copy;
+    var sum=0,sumt=0;
+    var check=0;
 
 
 
@@ -82,8 +83,13 @@
     for(var i=0;i<btns_number.length;i++){
         btns_number[i].onclick=function (){
             temp += this.value;
+            if(check)
+            {resultIpt.value="";
+            check=0;}
             resultIpt.value += this.value;
+            a[b]=parseFloat( temp);
         };
+
 
     }
     //对获取到的数进行操作
@@ -93,20 +99,23 @@
 
             oper = this.value;
             if(oper=="1/×"){
-                a[b]=parseFloat( temp);
+                if(check)a[b]=sumt;
                 a[b] = Math.pow(a[b],-1);//取倒数
                 resultIpt.value =a[b].toString();
-                b++;
+                check=0;
+
             }else if(oper=="﹢/﹣"){    //取相反数
-                a[b]=parseFloat( temp);
+                if(check)a[b]=sumt;
                 a[b]=-a[b];
                 resultIpt.value =a[b].toString();
-                b++;
+                check=0;
+
             }else if(oper=="√"){//取平方根
-                a[b]=parseFloat( temp);
-                a[b]=Math.sqrt(num1);
+                if(check)a[b]=sumt;
+                a[b]=Math.sqrt(a[b]);
                 resultIpt.value =a[b].toString();
-                b++;
+                check=0;
+
             }else if(oper=="←"){    //删除个位
                 resultIpt.value = resultIpt.value.substring(0, resultIpt.value.length - 1);
                 temp = temp.substring(0, temp.length - 1);
@@ -119,6 +128,7 @@
                 btns_operation="";
                 temp="";
                 b=0;
+                sumt=0;
             }else if(oper=="历史")
             {
                 for(var i=0;i<h;i++)
@@ -127,24 +137,29 @@
                 }
 
             }
+            else if(oper=="AC")
+            {
+                h=0;
+            }
             else{
                 //oper=="＋" "－" "×" "÷" "％"时，继续输入第二数字
-                a[b++]=parseFloat( temp);
+                if(check) a[b]=sumt;
                 temp = "";
                 resultIpt.value +=oper;
-                a[b++]=oper;
+                a[++b]=oper;
+                b++;
+                check=0;
             }
         }
     }
     //输出结果
     simpleEqu.onclick=function(){
         var c=new Array();
-        a[b++]=parseFloat(temp);
         c[0]=a[0];
         //用两个数组实现优先级问题
         var d=1,e=0;
-        var sum=0;
-        while(d<b-1) {
+
+        while(d<b) {
             if (a[d] === "＋" ) {
                 c[++e] = a[d + 1];//功能基本实现！！！！
             }
@@ -166,10 +181,18 @@
         {sum=floatAdd(sum,c[i])}
         copy=resultIpt.value;
         resultIpt.value=sum.toString();
+        //alert(a[0]);
+        //alert(a[1]);
+        //alert(a[2]);
         copy+="="+sum.toString();
         his[h++]=copy;
         a[0]=sum;
-        b=1;
+        sumt=sum;
+        sum=0;
+        b=0;
+        check=1;
+        temp="";
+
     }
 };
 //精确计算
