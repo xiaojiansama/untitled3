@@ -111,15 +111,16 @@
                 check=0;
 
             }else if(oper=="√"){//取平方根
-                if(check)a[b]=sumt;
+                if(check) a[b]=sumt;
                 a[b]=Math.sqrt(a[b]);
                 resultIpt.value =a[b].toString();
                 check=0;
 
             }else if(oper=="←"){    //删除个位
+                if(check) {a[b]=sumt;temp=a[b].toString();check=0;}
                 resultIpt.value = resultIpt.value.substring(0, resultIpt.value.length - 1);
                 temp = temp.substring(0, temp.length - 1);
-                a[b++]=parseFloat( temp);
+                a[b]=parseFloat( temp);
 
             }else if(oper=="C"){  //重新计算
                 resultIpt.value = "";
