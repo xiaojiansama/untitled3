@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2048 By dolphin</title>
+    <!-- Bootstrap -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container{
+            background-color: #EEEEEE;
+            max-width:500px;
+            height: 500px;
+        }
+        .btn {
+            min-width: 60px;
+        }
+        .row .col-xs-3 {
+            padding-right: 0;
+            padding-left: 0;
+            width: 20%;
+            margin-top: 20px;
+            margin-left: 4%;
+        }
+        .span {
+            font-size: 30px;
+            font-weight: bold;
+            border-radius: 5px;
+            color: #FFFFFF;
+            z-index: 10;
+        }
+        .span0 {
+            background-color: #F0E4DB;
+        }
+        .span2 {
+            background-color: #E3D5CB;
+        }
+        .span4 {
+            background-color: #F0E0C9;
+        }
+        .span8 {
+            background-color: #F5B178;
+        }
+        .span16 {
+            background-color: #F89563;
+        }
+        .span32 {
+            background-color: #F87A5E;
+        }
+        .span64 {
+            background-color: #F85C38;
+        }
+        .span128 {
+            background-color: #F0CF71;
+        }
+        .span256 {
+            background-color: #F0CD60;
+        }
+        .span512 {
+            background-color: #F0C84D;
+        }
+        .span1024 {
+            background-color: #F0C53D;
+        }
+        .span2048 {
+            background-color: #F0C32A;
+        }
+        .span4096 {
+            background-color: #F2656B;
+        }
+        .span8192 {
+            background-color: #F04B55;
+        }
+        .span16384 {
+            background-color: #F73E3D;
+        }
+        .span32768 {
+            background-color: #70B3D8;
+        }
+        .span65536 {
+            background-color: #4394C1;
+        }
+        .span131072 {
+            background-color: #1F73A2;
+        }
+    </style>
+
+</head>
+<body>
+<div class="lead text-center"><h3><strong>By dolphin</strong></h3></div>
+<div class="lead text-center"><h1><strong>积分 : <span id="score">0</span></strong></h1></div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3 text-center span" id="span00"></div>
+        <div class="col-xs-3 text-center span" id="span01"></div>
+        <div class="col-xs-3 text-center span" id="span02"></div>
+        <div class="col-xs-3 text-center span" id="span03"></div>
+        <div class="col-xs-3 text-center span" id="span10"></div>
+        <div class="col-xs-3 text-center span" id="span11"></div>
+        <div class="col-xs-3 text-center span" id="span12"></div>
+        <div class="col-xs-3 text-center span" id="span13"></div>
+        <div class="col-xs-3 text-center span" id="span20"></div>
+        <div class="col-xs-3 text-center span" id="span21"></div>
+        <div class="col-xs-3 text-center span" id="span22"></div>
+        <div class="col-xs-3 text-center span" id="span23"></div>
+        <div class="col-xs-3 text-center span" id="span30"></div>
+        <div class="col-xs-3 text-center span" id="span31"></div>
+        <div class="col-xs-3 text-center span" id="span32"></div>
+        <div class="col-xs-3 text-center span" id="span33"></div>
+    </div>
+    <div class="row text-center" style="margin-top: 60px;">
+        <div class="col-xs-offset-4 col-xs-4">
+            <button class="btn btn-info" onClick="up()"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        </div>
+    </div>
+    <div class="row text-center" style="margin-top: 30px;">
+        <div class="col-xs-4">
+            <button class="btn btn-info" onClick="left()"><span class="glyphicon glyphicon-arrow-left"></span></button>
+        </div>
+        <div class="col-xs-4">
+            <button class="btn btn-info" onClick="down()"><span class="glyphicon glyphicon-arrow-down"></span></button>
+        </div>
+        <div class="col-xs-4">
+            <button class="btn btn-info" onClick="right()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+        </div>
+    </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    var is_over  = true;
+    var is_move  = true;
+    var Score    = 0;
+    var Numarray = new Array();
+    for (var i = 0; i < 4; i++)
+    {
+        Numarray[i] = new Array();
+        for (var j = 0; j < 4; j++)
+        {
+            Numarray[i][j] = 0;
+        }
+    }
+    function isOver ()
+    {
+        for (var i = 0; i < 4; i++)
+        {
+            for (var j = 0; j < 4; j++)
+            {
+                if(Numarray[i][j] == 0)
+                {
+                    is_over = false;
+                    break;
+                }
+            }
+        }
+        for (var j = 0; j < 4; j++)
+        {
+            for (var i = 0; i < 3; i++)
+            {
+                if( Numarray[i][j] == Numarray[i+1][j] )
+                {
+                    is_over = false;
+                    break;
+                }
+            }
+        }
+        for (var i = 0; i < 4; i++)
+        {
+            for (var j = 0; j < 3; j++)
+            {
+                if( Numarray[i][j] == Numarray[i][j+1] )
+                {
+                    is_over = false;
+                    break;
+                }
+            }
+        }
+
+
+    }
+    /*
+     * 从所有的空闲格子中随机选择一个并产生新的数字（2/4）
+     */
+    function randomSpan ()
+    {
+        isOver();
+        if (is_over)
+        {
+            window.alert("Game Over");
+            return;
+        }
+        if(is_move)
+        {
+            while(1)
+            {
+                var random = Math.floor(Math.random() * 16);
+                var i = Math.floor(random / 4);
+                var j = Math.floor(random % 4);
+                if (Numarray[i][j] == 0)
+                {
+                    Numarray[i][j] = Math.floor(Math.random() * 2 + 1) * 2;
+                    is_over        = true;
+                    is_move        = false;
+                    break;
+                }
+            }
+        }
+    }
+    /*
+     * 根据Numarray中的值刷新显示界面 0不显示
+     */
+    function showSpan ()
+    {
+        for (var i = 0; i < 4; i++)
+        {
+            for (var j = 0; j < 4; j++)
+            {
+                $('#span' + i + j).removeClass();
+                $('#span' + i + j).addClass('col-xs-3 text-center span');
+                if(Numarray[i][j] == 0)
+                {
+                    $('#span' + i + j).html('');
+                }
+                else
+                {
+                    $('#span' + i + j).html(Numarray[i][j]);
+                }
+                $('#span' + i + j).addClass('span' + Numarray[i][j]);
+            }
+        }
+
+        $('#score').html(Score);
+    }
+    function upMove (j)
+    {
+        for (var i = 0; i < 3; i++)
+        {
+            if (Numarray[i][j] == 0 && Numarray[i+1][j] != 0)
+            {
+                Numarray[i][j]   = Numarray[i+1][j];
+                Numarray[i+1][j] = 0;
+                is_move          = true;
+                upMove(j);
+            }
+        }
+    }
+    function upCome (j)
+    {
+        for (var i = 0; i < 3; i++)
+        {
+            if (Numarray[i][j] != 0 && Numarray[i][j] == Numarray[i+1][j])
+            {
+                Score           += Numarray[i][j];
+                Numarray[i][j]   = Numarray[i][j] * 2;
+                Numarray[i+1][j] = 0;
+                is_move          = true;
+                upMove(j);
+            }
+        }
+    }
+    function downMove (j)
+    {
+        for (var i = 3; i > 0; i--)
+        {
+            if (Numarray[i][j] == 0 && Numarray[i-1][j] != 0)
+            {
+                Numarray[i][j]   = Numarray[i-1][j];
+                Numarray[i-1][j] = 0;
+                is_move          = true;
+                downMove(j);
+            }
+        }
+    }
+    function downCome (j)
+    {
+        for (var i = 3; i > 0; i--)
+        {
+            if (Numarray[i][j] != 0 && Numarray[i][j] == Numarray[i-1][j])
+            {
+                Score           += Numarray[i][j];
+                Numarray[i][j]   = Numarray[i][j] * 2;
+                Numarray[i-1][j] = 0;
+                is_move          = true;
+                downMove(j);
+            }
+        }
+    }
+    function leftMove (j)
+    {
+        for (var i = 0; i < 3; i++)
+        {
+            if (Numarray[j][i] == 0 && Numarray[j][i+1] != 0)
+            {
+                Numarray[j][i]   = Numarray[j][i+1];
+                Numarray[j][i+1] = 0;
+                is_move          = true;
+                leftMove(j);
+            }
+        }
+    }
+    function leftCome (j)
+    {
+        for (var i = 0; i < 3; i++)
+        {
+            if (Numarray[j][i] != 0 && Numarray[j][i] == Numarray[j][i+1])
+            {
+                Score           += Numarray[j][i];
+                Numarray[j][i]   = Numarray[j][i] * 2;
+                Numarray[j][i+1] = 0;
+                is_move          = true;
+                leftMove(j);
+            }
+        }
+    }
+    function rightMove (j)
+    {
+        for (var i = 3; i > 0; i--)
+        {
+            if (Numarray[j][i] == 0 && Numarray[j][i-1] != 0)
+            {
+                Numarray[j][i]   = Numarray[j][i-1];
+                Numarray[j][i-1] = 0;
+                is_move          = true;
+                rightMove(j);
+            }
+        }
+    }
+    function rightCome (j)
+    {
+        for (var i = 3; i > 0; i--)
+        {
+            if (Numarray[j][i] != 0 && Numarray[j][i] == Numarray[j][i-1])
+            {
+                Score           += Numarray[j][i];
+                Numarray[j][i]   = Numarray[j][i] * 2;
+                Numarray[j][i-1] = 0;
+                is_move          = true;
+                rightMove(j);
+            }
+        }
+    }
+    function up ()
+    {
+        for (var j=0;j<4;j++)
+            upMove(j);
+
+        for (var j=0;j<4;j++)
+            upCome(j);
+        randomSpan();
+        showSpan();
+    }
+    function down ()
+    {
+        for (var j=0;j<4;j++)
+            downMove(j);
+
+        for (var j=0;j<4;j++)
+            downCome(j);
+        randomSpan();
+        showSpan();
+    }
+    function left ()
+    {
+        for (var j=0;j<4;j++)
+            leftMove(j);
+
+        for (var j=0;j<4;j++)
+            leftCome(j);
+        randomSpan();
+        showSpan();
+    }
+    function right ()
+    {
+        for (var j=0;j<4;j++)
+            rightMove(j);
+
+        for (var j=0;j<4;j++)
+            rightCome(j);
+        randomSpan();
+        showSpan();
+    }
+    $(document).ready(function()
+    {
+        var random = Math.floor(Math.random() * 16);
+        var i = Math.floor(random / 4);
+        var j = Math.floor(random % 4);
+        Numarray[i][j] = 2;
+        random = Math.floor(Math.random() * 16);
+        i = Math.floor(random / 4);
+        j = Math.floor(random % 4);
+        Numarray[i][j] = 2;
+        var ScreencWidth  = document.body.clientWidth;
+        if (ScreencWidth < 500)
+        {
+            $('.col-xs-3').css('height','60px');
+            $('.col-xs-3').css('padding-top','12px');
+        }
+        else
+        {
+            $('.col-xs-3').css('height','100px');
+            $('.col-xs-3').css('padding-top','32px');
+        }
+        showSpan();
+        $(document).keyup(function(a)
+        {
+            if (a.keyCode==37)
+            {
+                left();
+            }
+
+            if (a.keyCode==38)
+            {
+                up();
+            }
+
+            if (a.keyCode==39)
+            {
+                right();
+            }
+
+            if (a.keyCode==40)
+            {
+                down();
+            }
+        });
+    });
+</script>
+</body>
+</html>
+
+
+

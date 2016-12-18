@@ -37,7 +37,7 @@
         }
         .span2{
             background-color: #E3D5CB;
-         }
+        }
         .span4{
             background-color: #F0E0C9;
         }
@@ -189,14 +189,14 @@
         {
             while(1)
             {var i=Math.floor(Math.random()*4);
-            var j=Math.floor(Math.random()*4);
-            if(number[i][j]==0)
-            {
-                number[i][j]=Math.floor(Math.random()*2+1)*2;
-                 isMove = false;
-                 isOver = true;
-                break;
-            }
+                var j=Math.floor(Math.random()*4);
+                if(number[i][j]==0)
+                {
+                    number[i][j]=Math.floor(Math.random()*2+1)*2;
+                    isMove = false;
+                    isOver = true;
+                    break;
+                }
             }
         }
     }
@@ -214,34 +214,34 @@
                     $('#span'+i+j).html('');
                 }
                 else
-                $('#span'+i+j).html(number[i][j]);
+                    $('#span'+i+j).html(number[i][j]);
                 $('#span'+i+j).addClass('span'+number[i][j]);
             }
         }
         $('#score').html(score);
     }
-        function up() {
-            for(var j = 0; j < 4;j++    )
-                for(var a = 0; a < 4;a++    )
-                    for(var i = 0; i < 3;i++    )
+    function up() {
+        for(var j = 0; j < 4;j++    )
+            for(var a = 0; a < 4;a++    )
+                for(var i = 0; i < 3;i++    )
+                {
+                    if(number[i][j]!=0 && number[i][j]==number[i+1][j])
                     {
-                        if(number[i][j]!=0 && number[i][j]==number[i+1][j])
-                        {
-                            number[i][j]=2*number[i+1][j];
-                            number[i+1][j]=0;
-                            score+=number[i][j];
-                            isMove=true;
-                        }
-                        if (number[i][j] == 0 && number[i + 1][j] != 0)
-                        {
-                            number[i][j] = number[i + 1][j];
-                            number[i + 1][j] = 0;
-                            isMove=true;}
+                        number[i][j]=2*number[i+1][j];
+                        number[i+1][j]=0;
+                        score+=number[i][j];
+                        isMove=true;
                     }
-            randomspan ();
-            span();
-        }
-        function left() {
+                    if (number[i][j] == 0 && number[i + 1][j] != 0)
+                    {
+                        number[i][j] = number[i + 1][j];
+                        number[i + 1][j] = 0;
+                        isMove=true;}
+                }
+        randomspan ();
+        span();
+    }
+    function left() {
         for(var i = 0; i < 4;i++    )
             for(var a = 0; a < 4;a++    )
                 for(var j = 0; j < 3;j++    )
