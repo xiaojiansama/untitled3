@@ -3,6 +3,7 @@ html,body{
 }
 h1,h2,a{
     font-family: 'Oswald', sans-serif;
+    cursor: hand;
 
 }
 p {
@@ -39,6 +40,7 @@ p {
 }
 .plus p a{
     font-size:25px;
+
 }
 .main h1{
     color: darkred;
