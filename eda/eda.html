@@ -1,0 +1,95 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+    <link href="eda.css" rel="stylesheet" type="text/css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(
+            function () {
+                $('.plus').hide(0);
+                $('.plus2').hide(0);
+            }
+        )
+        function toggleOne(){
+
+
+                    $('.plus').toggle( "bounce", { times: 3 }, "500" )
+
+
+        }
+        function toggleTwo() {
+
+
+                $('.plus2').toggle( "bounce", { times: 3 }, "500" )
+
+
+
+        }
+    </script>
+    <title>OurEDA</title>
+</head>
+<body>
+<div class="main">
+    <div class="container">
+        <h1>OurEDA</h1>
+        <p>To bring you four years of college life without regret </p>
+        <a class="btn" id="plus"  onclick="toggleOne()">Join Now</a>
+    </div>
+    <div class="plus">
+        <p>Please Join the QQ Group: <a>223514743</a></p>
+    </div>
+</div>
+<div class="supporting">
+    <div class="container">
+        <div class="col">
+            <h2>Web</h2>
+            <p>To become mastery of the front-end and the back-end</p>
+        </div>
+        <div class="col">
+            <h2>Andriod</h2>
+            <p>To design dozes of interesting mobile phone software</p>
+        </div>
+        <div class="col">
+            <h2>iOS</h2>
+            <p>To make wonderful software for the iphone or the ipad</p>
+        </div>
+        <div class="col">
+            <h2>UI</h2>
+            <p>To work out a series of beautiful interactive interface</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="feature">
+    <div class="container">
+        <h2>Move. Rest. Recover. Move.</h2>
+    </div>
+</div>
+<div class="supporting">
+    <div class="container">
+        <h2>Go diligent</h2>
+        <p>
+            Learn something useful for your future life, and don't leave you with a regret mood.
+        </p>
+        <a class="btn" href="https://pan.baidu.com/s/1hsJpApm?qq-pf-to=pcqq.c2c#list/path=%2F" target="_blank">Learn Something</a>
+    </div>
+</div>
+<div class="footer">
+    <div class="container">
+        <h2>
+            Stop wasting. Start moving
+        </h2>
+        <a class="btn" id="plus2" onclick="toggleTwo()">Come!</a>
+
+    </div>
+    <div class="plus2">
+        <p>Location：the Fourth Floor of the Multifunctional Building</p>
+    </div>
+</div>
+</body>
+</html>

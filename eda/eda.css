@@ -1,0 +1,161 @@
+html,body{
+    margin: 0;
+}
+h1,h2,a{
+    font-family: 'Oswald', sans-serif;
+
+}
+p {
+    font-family: Helvetica, Arial, sans-serif;
+}
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+    /*border: 1px solid pink;*/
+}
+
+/* main */
+.main{
+    text-align:  center;
+    background: url("bg.jpg") no-repeat center center;
+    background-size: cover;
+    height: 600px;
+    /*border: 1px solid green;*/
+
+}
+.main .container{
+    position: relative;
+    top: 100px;
+    /*border: 1px solid purple;*/
+
+}
+.main .plus{
+    /*border:1px solid yellow;*/
+    position: relative;
+    top:100px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top:10px ;
+}
+.plus p a{
+    font-size:25px;
+}
+.main h1{
+    color: darkred;
+    margin: 0;
+    font-size: 150px;
+}
+.main p{
+    color: #fff;
+    margin: 0 0 20px 0;
+    font-size: 18px;
+}
+.main .btn{
+    background-color: #1c1c1c;
+    color: #fff;
+    font-size: 18px;
+    padding: 8px 30px;
+    text-decoration: none;
+    display: inline-block;
+}
+a.btn:hover {
+    background:#ffa800;
+    color:#000;
+}
+/* supporting */
+.supporting{
+    background-color: #1c1c1c;
+    padding: 50px 0 80px;
+    text-align: center;
+    /*border: 1px solid blue;*/
+}
+.supporting .col{
+    display:inline-block;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    padding: 10px ;
+    width: 22% ;
+    /*border: 1px solid red;*/
+}
+.supporting h2 {
+    color: #ffa800;
+    font-size:25px ;
+    margin-bottom: 10px;
+}
+.clearfix{
+    clear: both;
+}
+.supporting p{
+    color: #efefef;
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+.supporting .btn {
+    background-color: #eee;
+    color: #1c1c1c;
+    font-size: 18px;
+    padding: 8px 30px;
+    text-decoration: none;
+    display: inline-block;
+}
+/* feature */
+.feature {
+    background: url("feature.jpg") no-repeat center center;
+    background-size: cover;
+    height: 600px;
+    text-align: center;
+}
+.feature .container{
+    position: relative;
+    top: 200px;
+}
+.feature h2{
+    color: #fff;
+    font-size:40px;
+    margin:0px;
+    padding:60px 0 0;
+}
+/* footer */
+.footer {
+    background: url("footer.jpg") no-repeat center center;
+    background-size: cover;
+    height: 600px;
+    text-align: center;
+    /*border: 1px solid red;*/
+}
+.footer .container {
+    position: relative;
+    top: 200px;
+}
+
+.footer h2 {
+    color: #fff;
+    font-size: 40px;
+    margin: 0 0 20px 0;
+    padding:50px 0 0;
+}
+
+.footer p {
+    color: #fff;
+    font-size: 18px;
+    margin: 0 0 20px 0;
+}
+
+.footer .btn {
+    background-color: #1c1c1c;
+    color: #fff;
+    font-size: 18px;
+    padding: 8px 30px;
+    text-decoration: none;
+    display: inline-block;
+}
+.plus2{
+    /*border:1px solid yellow;*/
+    position: relative;
+    top:200px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top:10px ;
+}
+
