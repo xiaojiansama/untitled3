@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+
+    }
+    body{
+        background: url("312676-106.jpg") no-repeat center center;
+        background-size:cover;
+        width: 1536px;
+        height: 758px
+    }
+    #div1{
+        margin:0 auto;
+        width:600px;
+        height:200px;
+        position: relative;
+        top:250px;
+    }
+    .in{
+        margin:0 auto;
+        width:500px;
+        height: 30px;
+        font-size: 16px;
+        display: block;
+        position: relative;
+        border:1px red solid;
+        border-radius: 10px;
+        outline:none;
+        filter:alpha(opacity:60);
+        opacity:0.6;
+
+    }
+    #div2
+    {
+        width:200px;
+        height: 30px;
+        margin:0 auto;
+        position: relative;
+        top: 270px;
+    }
+    #text{
+        width:504px;
+        height: 32px;
+        margin:0 auto;
+        position: relative;
+    }
+    #pass{
+        width:504px;
+        height: 32px;
+        margin:40px auto 0;
+        position: relative;
+    }
+    #submit{
+        width:100px;
+    }
+
+    #btn{
+        width:200px;
+        height: 30px;
+        font-size: 18px;
+        color: Aliceblue;
+        border-radius:50px;
+        background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
+        outline:none;
+        filter:alpha(opacity:60);
+        opacity:0.6;
+    }
+    #subm{
+        width:120px;
+        height:60px;
+        position: relative;
+        left: 240px;
+        top:20px;
+
+    }
+    #submit{
+        width:100px;
+        height:40px;
+        margin:10px;
+        font-size: 18px;
+        color: Aliceblue;
+        border-radius:50px;
+        background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
+        outline:none;
+        filter:alpha(opacity:60);
+        opacity:0.6;
+    }
+    #ul1{
+        width:450px;
+        height:250px;
+        border:4px solid black;
+        overflow: hidden;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.6);
+        top:0px;
+        left:0px;
+        filter:alpha(opacity:0);
+        opacity:0;
+    }
+
+    li{
+        border-bottom:1px #ccc0b3 dashed;
+        list-style: none;
+        overflow: hidden;
+        color: Aliceblue;
+        filter:alpha(opacity:0);
+        opacity: 0;
+
+    }
+    a{
+        position: absolute;
+        top:240px;
+        left: 440px;
+        filter:alpha(opacity:0);
+        opacity: 0;
+        cursor:default;
+    }
+</style>
+<script src="move.js" ></script>
+<script src="new_myajax.js"></script>
+<script>
+//alert(document.documentElement.clientHeight);
+//alert(document.documentElement.clientWidth);
+    window.onload=function ()
+    {
+        var oTxt = document.getElementById("email");
+        var oPass = document.getElementById("password");
+        var oBtn = document.getElementById("btn");
+        var oSub = document.getElementById("submit");
+        var oUl = document.getElementById("ul1");
+        var oBtn1 = document.getElementById("btn1");
+        var oTxt1 = document.getElementById("txt1");
+        var aA = document.getElementById("a");
+
+        oTxt.onmouseover=function(){startMove(this,{opacity:100})};
+        oTxt.onmouseout=function(){startMove(this,{opacity:60})};
+        oSub.onmouseover=function(){startMove(this,{opacity:100})};
+        oSub.onmouseout=function(){startMove(this,{opacity:60})};
+        oPass.onmouseover=function(){startMove(this,{opacity:100})};
+        oPass.onmouseout=function(){startMove(this,{opacity:60})};
+        oBtn.onmouseover=function(){startMove(this,{opacity:100})};
+        oBtn.onmouseout=function(){startMove(this,{opacity:60})};
+
+
+        a.onclick=function () {
+            startMove(oUl,{opacity:0});
+            startMove(aA,{opacity:0});
+            this.style.cursor='default';
+        };
+        oBtn.onclick=function (){
+            var data={};
+            var sdata={};
+            data.username = oTxt.value;
+            sdata.username = oTxt.value;
+            data.password = oPass.value;
+            data=JSON.stringify(data);
+            if(/^(\w)+@([a-z0-9])+(\.([a-z0-9]+))+$/i .test(sdata.username))
+            {ajax("http://localhost:3000",data,function fSucc(str){
+                startMove(oUl,{opacity:100},tab(str));
+                startMove(aA,{opacity:100});
+                aA.style.cursor='pointer';
+
+            },function fFaild(str) {
+                startMove(oUl,{opacity:100},tab(str));
+            })}
+            else {
+                startMove(oUl,{opacity:100},tab('你丫邮箱格式整错了'));
+                startMove(aA,{opacity:100});
+                aA.style.cursor='pointer';
+            }
+        }
+
+    };
+function tab(str) {
+    var oUl = document.getElementById("ul1");
+    var oLi = document.createElement('li');
+    oLi.innerHTML = str;
+    if(oUl.children.length!=0)
+    {
+        oUl.insertBefore(oLi,oUl.children[0]);
+    }
+    else
+    {
+        oUl.appendChild(oLi);
+    }
+    var oHeight = oLi.offsetHeight;
+    oLi.style.height = 0;
+    startMove(oLi,{height:oHeight},function () {
+        startMove(oLi,{opacity:100})
+    })
+
+}
+
+</script>
+<body >
+<div id="div1">
+    <form action="http://localhost:3000/?action=login" role='form' method="post">
+     <div id="text" >
+        <input type="text" class="in" id="email" name="email" placeholder="邮箱" />
+     </div>
+        <div id="pass"  >
+        <input type="password" class="in" id="password" name="password" placeholder="密码" />
+     </div>
+        <div id="subm" >
+            <input type="submit" id="submit" name="submit" value="登陆(跳转)"/>
+        </div>
+    </form>
+</div>
+<div id="div2">
+    <button id="btn"><span>登陆(ajax)</span></button>
+</div>
+<ul id="ul1"></ul>
+<a href="javascript:;" id="a"><img src="icon_close_alt.png" height="32" width="32"/></a>
+</body>
+</html>
