@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+    <title>Sign in</title>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
 <style>
     *{
         margin:0;
@@ -76,12 +76,12 @@
         width:120px;
         height:60px;
         position: relative;
-        left: 240px;
+        left: 230px;
         top:20px;
 
     }
     #submit{
-        width:100px;
+        width:120px;
         height:40px;
         margin:10px;
         font-size: 18px;
@@ -199,22 +199,23 @@ function tab(str) {
 }
 
 </script>
+</head>
 <body >
 <div id="div1">
     <form action="http://localhost:3000/?action=login" role='form' method="post">
      <div id="text" >
-        <input type="text" class="in" id="email" name="email" placeholder="邮箱" />
+        <input type="text" class="in" id="email" name="email" placeholder="Email" />
      </div>
         <div id="pass"  >
-        <input type="password" class="in" id="password" name="password" placeholder="密码" />
+        <input type="password" class="in" id="password" name="password" placeholder="Password" />
      </div>
         <div id="subm" >
-            <input type="submit" id="submit" name="submit" value="登陆(跳转)"/>
+            <input type="submit" id="submit" name="submit" value="Sign in(Jump)"/>
         </div>
     </form>
 </div>
 <div id="div2">
-    <button id="btn"><span>登陆(ajax)</span></button>
+    <button id="btn"><span>Sign in(Ajax)</span></button>
 </div>
 <ul id="ul1"></ul>
 <a href="javascript:;" id="a"><img src="icon_close_alt.png" height="32" width="32"/></a>
